@@ -1,21 +1,15 @@
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 dotenv.config();
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
 
-
-export interface IPayload{
-    _id:string
+export interface IPayload {
+  _id: string;
+  role: string;
 }
 
-export const generate_token = (payload:IPayload): string => {
-   
-    const token = jwt.sign(
-		{
-			_id: payload._id,
-		},
-		process.env.JWT_SECRET,
-		{ expiresIn: process.env.JWT_EXPIRE }
-	)
-
-    return token
-}
+export const generate_token = (payload: IPayload): string => {
+  const token = jwt.sign(payload, process.env.JWT_SECRET as string, {
+    expiresIn: process.env.JWT_EXPIRE,
+  });
+  return token;
+};
