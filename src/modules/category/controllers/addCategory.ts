@@ -23,7 +23,9 @@ const addCategory = async (req: Request, res: Response) => {
       data: category,
     });
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    if (error instanceof Error) {
+      return res.status(500).json({ error: error.message });
+    }
   }
 };
 

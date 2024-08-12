@@ -20,7 +20,9 @@ const deleteCategory = async (req: Request, res: Response) => {
     await data.save();
     return res.status(200).json({ message: 'Category deleted successfully!' });
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    if (error instanceof Error) {
+      return res.status(500).json({ error: error.message });
+    }
   }
 };
 

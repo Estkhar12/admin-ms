@@ -1,11 +1,10 @@
+declare namespace Express {
+  export interface Request {
+    user?: any;
+  }
 
-declare namespace Express{
-    export interface Request{
-        user?: any
-    }
-
-    export interface Response{
-        [key: string]: any
-        status: CallableFunction
-    }
+  export interface Response {
+    [key: string]: any;
+    status: CallableFunction;
+  }
 }

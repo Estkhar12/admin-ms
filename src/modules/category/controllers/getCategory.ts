@@ -19,7 +19,9 @@ const getCategory = async (req: Request, res: Response) => {
     }
     return res.status(200).json({ success: true, data: data });
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    if (error instanceof Error) {
+      return res.status(500).json({ error: error.message });
+    }
   }
 };
 
