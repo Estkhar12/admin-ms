@@ -13,14 +13,14 @@ export const signup = async (req: Request, res: Response) => {
     });
     if (existingUser) {
       if (existingUser.email === email) {
-        res.status(400).json({ error: 'Cannot use existing email' });
+        return res.status(400).json({ error: 'Cannot use existing email' });
       }
       if (existingUser.username === username) {
-        res.status(400).json({ error: 'Cannot use existing username' });
+        return res.status(400).json({ error: 'Cannot use existing username' });
       }
     }
     if (!isValidEmail) {
-      res.status(400).json({ error: 'Invalid email formate' });
+      return res.status(400).json({ error: 'Invalid email formate' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -31,7 +31,7 @@ export const signup = async (req: Request, res: Response) => {
       role,
     });
     await user.save();
-    res
+    return res
       .status(200)
       .json({ message: 'admin is created successfully', data: user });
   } catch (error) {

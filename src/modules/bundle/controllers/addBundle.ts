@@ -6,7 +6,7 @@ import Bundle from '../../../models/bundle';
 const addBundle = async (req: Request, res: Response) => {
   try {
     const { _id, role } = req.user;
-    const { name, productsId, discount } = req.body;
+    const { bundleName, productsId, discount } = req.body;
 
     // Validate that productsId is an array of valid ObjectId strings
     if (
@@ -15,7 +15,6 @@ const addBundle = async (req: Request, res: Response) => {
     ) {
       return res.status(400).json({ error: 'Invalid product IDs provided' });
     }
-
     // Remove duplicate IDs
     const uniqueProductIds = [...new Set(productsId)];
 
@@ -58,7 +57,7 @@ const addBundle = async (req: Request, res: Response) => {
 
     // Create the bundle with the calculated price
     const bundle = await Bundle.create({
-      name,
+      bundleName,
       price: finalPrice,
       _products: productIds,
       discount,

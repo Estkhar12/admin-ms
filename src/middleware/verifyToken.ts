@@ -8,11 +8,7 @@ interface JwtPayload {
   role: string;
 }
 
-export const verify_token = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const verify_token = async (req: Request,res: Response,next: NextFunction) => {
   try {
     const token = req.headers?.authorization?.split(' ')[1];
     if (!token) {

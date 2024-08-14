@@ -7,7 +7,7 @@ const updateBundle = async (req: Request, res: Response) => {
   try {
     const { _id } = req.user;
     const { bundleId } = req.query;
-    const { name, productsId, discount } = req.body;
+    const { bundleName, productsId, discount } = req.body;
 
     if (!isValidObjectId(bundleId)) {
       return res.status(400).json({ error: 'Invalid bundle Id.' });
@@ -86,7 +86,7 @@ const updateBundle = async (req: Request, res: Response) => {
     }
 
     // Update only the provided fields
-    if (name !== undefined) bundle.name = name;
+    if (bundleName !== undefined) bundle.bundleName = bundleName;
     if (discount !== undefined) {
       // Ensure the discount is a number, greater than 0, and does not exceed 100
       const discountValue = Number(discount);

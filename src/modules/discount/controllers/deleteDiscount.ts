@@ -33,7 +33,6 @@ export const deleteDiscount = async (req: Request, res: Response) => {
         })
       );
     }
-
     // Update related bundles
     if (discount._bundles && discount._bundles.length > 0) {
       await Promise.all(

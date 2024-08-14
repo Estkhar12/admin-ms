@@ -5,8 +5,14 @@ import Product from '../../../models/product';
 const addProduct = async (req: Request, res: Response) => {
   try {
     const { _id, role } = req.user;
-    const { name, description, mrp, discount, _category, stockAvailable } =
-      req.body;
+    const {
+      productName,
+      description,
+      mrp,
+      discount,
+      _category,
+      stockAvailable,
+    } = req.body;
     const category = await Category.findById(_category);
     if (!category) {
       return res.status(400).json({ error: 'Invalid category' });
@@ -18,7 +24,7 @@ const addProduct = async (req: Request, res: Response) => {
       discount > 0 || discount <= 100 ? mrp - (mrp * discount) / 100 : mrp;
 
     const product = await Product.create({
-      name,
+      productName,
       price: finalPrice,
       description,
       mrp,

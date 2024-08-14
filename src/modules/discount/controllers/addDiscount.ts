@@ -1,6 +1,6 @@
-import { Discount } from '@models/discount';
 import { Request, Response } from 'express';
 import moment from 'moment';
+import Discount from '../../../models/discount';
 
 export const addDiscount = async (req: Request, res: Response) => {
   try {
@@ -54,7 +54,8 @@ export const addDiscount = async (req: Request, res: Response) => {
 
     return res.status(201).json({ success: true, data: discount });
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error: error.message });
+     if (error instanceof Error) {
+       return res.status(500).json({ error: error.message });
+     }
   }
 };

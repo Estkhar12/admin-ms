@@ -1,7 +1,7 @@
 import { Document, model, Schema } from 'mongoose';
 
 export interface IBundle extends Document {
-  name: string;
+  bundleName: string;
   price: number;
   discount?: number;
   isDeleted: boolean;
@@ -18,7 +18,7 @@ export interface IBundle extends Document {
 
 const bundleSchema: Schema = new Schema(
   {
-    name: {
+    bundleName: {
       type: String,
       required: true,
     },
